@@ -1,8 +1,8 @@
 import TelegramBot from 'node-telegram-bot-api';
 import {OpenAI} from 'openai';
-import {token, openaiApiKey} from './keys.js'
+import {openaiApiKey} from './keys.js'
 
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
 
 const openai = new OpenAI({
     apiKey: openaiApiKey,
@@ -49,43 +49,42 @@ const keyboard = {
     ],
 };
 
-const start = () => {
-    bot.setMyCommands([
-        {command: '/start', 'description': 'Гороскоп.'},
-    ]);
 
-    bot.on('message', async msg => {
-        const text = msg.text;
-        const chatId = msg.chat.id;
+bot.setMyCommands([
+    {command: '/start', 'description': 'Гороскоп.'},
+]);
 
-        if (text === '/start') {
-            return bot.sendMessage(chatId, 'Выберите знак зодиака:', {
-                reply_markup: keyboard,
-            });
-        }
+bot.on('message', async msg => {
+    const text = msg.text;
+    const chatId = msg.chat.id;
 
-        return bot.sendMessage(chatId, 'Звёзды не поняли вас')
-    });
-
-    // Обработчик нажатий на кнопки
-    bot.on('callback_query', (callbackQuery) => {
-        const msg = callbackQuery.message;
-        const data = callbackQuery.data;
-        const index = data.split('_')[1];
-        const sign = zodiacSigns[index];
-
-        bot.sendMessage(
-            msg.chat.id,
-            `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
-
-        ai(sign.name).then((prediction) => {
-            bot.sendMessage(msg.chat.id, prediction);
-        }).catch((error) => {
-            console.error('Error sending message:', error);
-            bot.sendMessage(msg.chat.id, 'Произошла ошибка при отправке предсказания.');
+    if (text === '/start') {
+        return bot.sendMessage(chatId, 'Выберите знак зодиака:', {
+            reply_markup: keyboard,
         });
-    });
-}
+    }
 
-start()
+    return bot.sendMessage(chatId, 'Звёзды не поняли вас')
+});
+
+// Обработчик нажатий на кнопки
+bot.on('callback_query', (callbackQuery) => {
+    const msg = callbackQuery.message;
+    const data = callbackQuery.data;
+    const index = data.split('_')[1];
+    const sign = zodiacSigns[index];
+
+    bot.sendMessage(
+        msg.chat.id,
+        `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
+
+    ai(sign.name).then((prediction) => {
+        bot.sendMessage(msg.chat.id, prediction);
+    }).catch((error) => {
+        console.error('Error sending message:', error);
+        bot.sendMessage(msg.chat.id, 'Произошла ошибка при отправке предсказания.');
+    });
+});
+
+export default bot;
 

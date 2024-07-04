@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/**": {
+      "includeFiles": "node_modules/node-telegram-bot-api/**"
+    }
+  },
+  "github": {
+    "silent": true
+  }
+}
