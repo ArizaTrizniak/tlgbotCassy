@@ -124,12 +124,7 @@ bot.on('callbackQuery', (msg) => {
         msg.from.id,
         `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
   
-    if (data === 'sign_0') {
-      bot.sendMessage(msg.from.id, 'You pressed Button 1');
-    } else {
-      bot.sendMessage(msg.from.id, 'You pressed Button ?');
-    }
-    bot.answerCallbackQuery(msg.id); // Acknowledge the callback
+    //bot.answerCallbackQuery(msg.id); // Acknowledge the callback
 });
 
 
