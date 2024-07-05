@@ -3,11 +3,10 @@ import {OpenAI} from 'openai';
 
 const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 
-try {
-    const openai = new OpenAI({apiKey: process.env.OPEN_API_TOKEN});
-} catch (error) {
-    console.log (error);
-}
+console.log("OPEN_API_TOKEN:", process.env.OPEN_API_TOKEN);
+
+const openai = new OpenAI({apiKey: process.env.OPEN_API_TOKEN});
+
 
 
 /*async function ai(value) {
@@ -70,52 +69,6 @@ const replyMarkup = bot.inlineKeyboard([
         bot.inlineButton('♓️ Рыбы', {callback: 'sign_11'}),
     ]
 ]);
-
-/*bot.setMyCommands([
-    {command: '/start', 'description': 'Гороскоп.'},
-]);*/
-
-/*bot.on('message', async msg => {
-    const text = msg.text;
-    const chatId = msg.chat.id;
-
-    if (text === '/start') {
-        return bot.sendMessage(chatId, 'Выберите знак зодиака:', {
-            reply_markup: keyboard,
-        });
-    }
-
-    return bot.sendMessage(chatId, 'Звёзды не поняли вас')
-});*/
-
-// Обработчик нажатий на кнопки
-/*bot.on('callback_query', (callbackQuery) => {
-    const msg = callbackQuery.message;
-    const data = callbackQuery.data;
-    const index = data.split('_')[1];
-    const sign = zodiacSigns[index];
-
-    bot.sendMessage(
-        msg.chat.id,
-        `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
-
-    ai(sign.name).then((prediction) => {
-        bot.sendMessage(msg.chat.id, prediction);
-    }).catch((error) => {
-        console.error('Error sending message:', error);
-        bot.sendMessage(msg.chat.id, 'Произошла ошибка при отправке предсказания.');
-    });
-});*/
-
-/*bot.on("text", msg => {
-    const text = msg.text;
-    const chatId = msg.chat.id;
-
-    if (text === '/start') {
-        return bot.sendMessage(chatId, 'Выберите знак зодиака:', {replyMarkup});
-    }
-    msg.reply.text(msg.text)
-});*/
 
 
 // Обработка команды /start
