@@ -126,16 +126,17 @@ bot.on('callbackQuery', (msg) => {
     const index = data.split('_')[1];
     const sign = zodiacSigns[index]
 
-    console.log (prediction);
+    //console.log (prediction);
 
     bot.sendMessage(msg.from.id, `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
     
-    ai(sign.name).then((prediction) => {
+  /*  ai(sign.name).then((prediction) => {
+    //console.log (prediction);
         bot.sendMessage(msg.chat.id, prediction);
     }).catch((error) => {
         console.error('Error sending message:', error);
         bot.sendMessage(msg.chat.id, 'Произошла ошибка при отправке предсказания.');
-    });
+    });*/
 
     // Подтверждение получения обратного вызова
     bot.answerCallbackQuery(msg.id, {
