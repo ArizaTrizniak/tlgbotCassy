@@ -61,6 +61,11 @@ let replyMarkup = bot.inlineKeyboard([
         bot.inlineButton('♍️ Дева', {callback: 'sign_5'}),
         bot.inlineButton('♎️ Весы', {callback: 'sign_6'}),
         bot.inlineButton('♏️ Скорпион', {callback: 'sign_7'}),
+    ], [
+        bot.inlineButton('♐️ Стрелец', {callback: 'sign_8'}),
+        bot.inlineButton('♑️ Козерог', {callback: 'sign_9'}),
+        bot.inlineButton('♒️ Водолей', {callback: 'sign_10'}),
+        bot.inlineButton('♓️ Рыбы', {callback: 'sign_11'}),
     ]
 ]);
 
@@ -112,6 +117,12 @@ bot.on("text", msg => {
 
 bot.on('callbackQuery', (msg) => {
     const data = msg.data; // callback_data of the button
+    const index = data.split('_')[1];
+    const sign = zodiacSigns[index];
+
+    bot.sendMessage(
+        msg.from.id,
+        `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
   
     if (data === 'sign_0') {
       bot.sendMessage(msg.from.id, 'You pressed Button 1');
