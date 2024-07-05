@@ -1,11 +1,10 @@
 import TeleBot from "telebot"
 import {OpenAI} from 'openai';
-import {openaiApiKey} from './keys.js'
 
 const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 
 const openai = new OpenAI({
-    apiKey: openaiApiKey,
+    apiKey: process.env.OPEN_API_TOKEN,
 });
 
 async function ai(value) {
