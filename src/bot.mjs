@@ -105,7 +105,7 @@ let replyMarkup = bot.inlineKeyboard([
     });
 });*/
 
-bot.on("text", msg => {
+/*bot.on("text", msg => {
     const text = msg.text;
     const chatId = msg.chat.id;
 
@@ -113,7 +113,14 @@ bot.on("text", msg => {
         return bot.sendMessage(chatId, 'Выберите знак зодиака:', {replyMarkup});
     }
     msg.reply.text(msg.text)
-});
+});*/
+
+// Обработка команды /start
+bot.on(['/start'], (msg) => {
+    bot.sendMessage(msg.chat.id, 'Выберите знак зодиака:', {
+      replyMarkup: replyMarkup
+    });
+  });
 
 bot.on('callbackQuery', (msg) => {
 
@@ -131,7 +138,6 @@ bot.on('callbackQuery', (msg) => {
         text: 'Button pressed', // Сообщение, которое увидит пользователь
         showAlert: false // Либо true для отображения всплывающего окна
     });
-
 
 });
 
