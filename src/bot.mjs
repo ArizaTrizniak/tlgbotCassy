@@ -49,6 +49,14 @@ const keyboard = {
     ],
 };
 
+const buttons1 = [];
+const buttons1 = zodiacSigns.map((sign, index) => ({
+    buttons1.push();
+
+    text: `${sign.symbol} ${sign.name}`,
+    callback_data: `sign_${index}`,
+}));
+bot.inlineButton('callback', {callback: 'this_is_data'}),
 
 
 /*bot.setMyCommands([
@@ -114,11 +122,8 @@ bot.on(['/start'], msg => {
 // Inline buttons
 bot.on('/inlineKeyboard', msg => {
 
-    const replyMarkup = bot.inlineKeyboard([
+    const replyMarkup = bot.inlineQueryKeyboard([
         [
-            bot.inlineButton('callback', {callback: 'this_is_data'}),
-            bot.inlineButton('inline', {inline: 'some query'})
-        ], [
             buttons.slice(0, 3),
             buttons.slice(3, 6),
             buttons.slice(6, 9),
