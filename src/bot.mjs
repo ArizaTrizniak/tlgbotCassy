@@ -82,7 +82,7 @@ let replyMarkup = bot.inlineKeyboard([
 });*/
 
 // Обработчик нажатий на кнопки
-bot.on('callback_query', (callbackQuery) => {
+/*bot.on('callback_query', (callbackQuery) => {
     const msg = callbackQuery.message;
     const data = callbackQuery.data;
     const index = data.split('_')[1];
