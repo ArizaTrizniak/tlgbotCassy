@@ -1,8 +1,8 @@
-import TelegramBot from 'node-telegram-bot-api';
+import TeleBot from "telebot"
 import {OpenAI} from 'openai';
 import {openaiApiKey} from './keys.js'
 
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
+const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 
 const openai = new OpenAI({
     apiKey: openaiApiKey,
@@ -50,9 +50,9 @@ const keyboard = {
 };
 
 
-bot.setMyCommands([
+/*bot.setMyCommands([
     {command: '/start', 'description': 'Гороскоп.'},
-]);
+]);*/
 
 bot.on('message', async msg => {
     const text = msg.text;
