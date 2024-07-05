@@ -18,6 +18,7 @@ async function ai(value) {
         return 'Сегодня звезды не хотят отвечать вам. Попробуйте позже';
     }
 }
+*/
 
 const zodiacSigns = [
     { name: 'Овен', symbol: '♈️' },
@@ -90,7 +91,9 @@ bot.on("text", msg => {
     const chatId = msg.chat.id;
 
     if (text === '/start') {
-        return bot.sendMessage(chatId, 'Выберите знак зодиака:');
+        return bot.sendMessage(chatId, 'Выберите знак зодиака:', {
+            reply_markup: keyboard,
+        });
     }
     msg.reply.text(msg.text)
 })
