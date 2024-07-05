@@ -1,9 +1,9 @@
 import TeleBot from "telebot"
-/*import {OpenAI} from 'openai';*/
+import {OpenAI} from 'openai';
 
 const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 
-/*const openai = new OpenAI({
+const openai = new OpenAI({
     apiKey: process.env.OPEN_API_TOKEN,
 });
 
@@ -18,7 +18,7 @@ async function ai(value) {
         return 'Сегодня звезды не хотят отвечать вам. Попробуйте позже';
     }
 }
-*/
+
 
 const zodiacSigns = [
     { name: 'Овен', symbol: '♈️' },
@@ -48,7 +48,6 @@ const keyboard = {
         buttons.slice(9, 12),
     ],
 };
-
 
 const replyMarkup = bot.inlineKeyboard([
     [
@@ -115,6 +114,7 @@ const replyMarkup = bot.inlineKeyboard([
     msg.reply.text(msg.text)
 });*/
 
+
 // Обработка команды /start
 bot.on(['/start'], (msg) => {
     bot.sendMessage(msg.chat.id, 'Выберите знак зодиака:', {replyMarkup});
@@ -126,10 +126,16 @@ bot.on('callbackQuery', (msg) => {
     const index = data.split('_')[1];
     const sign = zodiacSigns[index]
 
-    console.log (data);
-    console.log (index);
+    console.log (prediction);
 
     bot.sendMessage(msg.from.id, `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
+    
+    ai(sign.name).then((prediction) => {
+        bot.sendMessage(msg.chat.id, prediction);
+    }).catch((error) => {
+        console.error('Error sending message:', error);
+        bot.sendMessage(msg.chat.id, 'Произошла ошибка при отправке предсказания.');
+    });
 
     // Подтверждение получения обратного вызова
     bot.answerCallbackQuery(msg.id, {
