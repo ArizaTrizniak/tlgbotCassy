@@ -52,10 +52,10 @@ const keyboard = {
 
 let replyMarkup = bot.inlineKeyboard([
     [
-        bot.inlineButton('Овен', {callback: sign_1}),
-        bot.inlineButton('Телец', {callback: sign_2}),
-        bot.inlineButton('Близнецы', {callback: sign_3}),
-        bot.inlineButton('Рак', {callback: sign_4}),
+        bot.inlineButton('Овен', {callback: 'sign_1'}),
+        bot.inlineButton('Телец', {callback: 'sign_2'}),
+        bot.inlineButton('Близнецы', {callback: 'sign_3'}),
+        bot.inlineButton('Рак', {callback: 'sign_4'}),
     ], [
         bot.inlineButton('url', {url: 'https://telegram.org'})
     ]
