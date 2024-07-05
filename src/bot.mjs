@@ -3,9 +3,9 @@ import {OpenAI} from 'openai';
 
 const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 
-console.log("OPEN_API_TOKEN:", process.env.OPEN_API_TOKEN);
+console.log(process.env.OPEN_API_TOKEN);
 
-const openai = new OpenAI({apiKey: process.env.OPEN_API_TOKEN});
+//const openai = new OpenAI({apiKey: process.env.OPEN_API_TOKEN});
 
 
 
