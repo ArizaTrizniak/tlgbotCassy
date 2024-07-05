@@ -116,15 +116,24 @@ bot.on("text", msg => {
 });
 
 bot.on('callbackQuery', (msg) => {
-    const data = msg.data; // callback_data of the button
-    const index = data.split('_')[1];
-    const sign = zodiacSigns[index];
 
-    bot.sendMessage(
-        msg.from.id,
-        `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
-  
-    //bot.answerCallbackQuery(msg.id); // Acknowledge the callback
+    const data = msg.data; // callback_data кнопки
+    const index = data.split('_')[1];
+    const sign = zodiacSigns[index]
+
+    if (data === 'index') {
+        bot.sendMessage(msg.from.id, `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
+    } else {
+        bot.sendMessage(msg.from.id, 'You pressed Button 2');
+    }
+    
+    // Подтверждение получения обратного вызова
+    bot.answerCallbackQuery(msg.id, {
+        text: 'Button pressed', // Сообщение, которое увидит пользователь
+        showAlert: false // Либо true для отображения всплывающего окна
+    });
+
+
 });
 
 
