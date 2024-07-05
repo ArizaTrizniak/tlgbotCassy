@@ -85,7 +85,15 @@ bot.on('callback_query', (callbackQuery) => {
     });
 });*/
 
-bot.on("text", msg => msg.reply.text(msg.text))
+bot.on("text", msg => {
+    const text = msg.text;
+    const chatId = msg.chat.id;
+
+    if (text === '/start') {
+        return bot.sendMessage(chatId, 'Выберите знак зодиака:');
+    }
+    msg.reply.text(msg.text)
+})
 
 export default bot;
 
