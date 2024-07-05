@@ -3,10 +3,10 @@ import {OpenAI} from 'openai';
 
 const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 
-const openai = new OpenAI({
+/*const openai = new OpenAI({
     apiKey: process.env.OPEN_API_TOKEN,
 });
-
+*/
 /*async function ai(value) {
     try {
         const response = await openai.chat.completions.create({
