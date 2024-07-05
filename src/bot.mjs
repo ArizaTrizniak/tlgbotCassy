@@ -50,7 +50,7 @@ const keyboard = {
 };
 
 
-let replyMarkup = bot.inlineKeyboard([
+const replyMarkup = bot.inlineKeyboard([
     [
         bot.inlineButton('♈️ Овен', {callback: 'sign_0'}),
         bot.inlineButton('♉️ Телец', {callback: 'sign_1'}),
@@ -117,9 +117,7 @@ let replyMarkup = bot.inlineKeyboard([
 
 // Обработка команды /start
 bot.on(['/start'], (msg) => {
-    bot.sendMessage(msg.chat.id, 'Выберите знак зодиака:', {
-      replyMarkup: replyMarkup
-    });
+    bot.sendMessage(msg.chat.id, 'Выберите знак зодиака:', {replyMarkup});
   });
 
 bot.on('callbackQuery', (msg) => {
