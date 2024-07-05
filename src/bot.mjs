@@ -98,5 +98,33 @@ bot.on("text", msg => {
     msg.reply.text(msg.text)
 })
 
+// On commands
+bot.on(['/start'], msg => {
+
+    let replyMarkup = bot.keyboard([
+        [ '/inlineKeyboard'],
+        ['/start', '/hide']
+    ], {resize: true});
+
+    return bot.sendMessage(msg.from.id, 'Keyboard example.', {replyMarkup});
+
+});
+
+// Inline buttons
+bot.on('/inlineKeyboard', msg => {
+
+    let replyMarkup = bot.inlineKeyboard([
+        [
+            bot.inlineButton('callback', {callback: 'this_is_data'}),
+            bot.inlineButton('inline', {inline: 'some query'})
+        ], [
+            bot.inlineButton('url', {url: 'https://telegram.org'})
+        ]
+    ]);
+
+    return bot.sendMessage(msg.from.id, 'Inline keyboard example.', {replyMarkup});
+
+});
+
 export default bot;
 
