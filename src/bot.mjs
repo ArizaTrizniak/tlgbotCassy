@@ -7,7 +7,7 @@ const openai = new OpenAI({
     apiKey: process.env.OPEN_API_TOKEN,
 });
 
-async function ai(value) {
+/*async function ai(value) {
     try {
         const response = await openai.chat.completions.create({
             messages: [{ role: 'user', content: `Сделай короткое предсказание для знака ${value}`}],
@@ -17,7 +17,7 @@ async function ai(value) {
     } catch (error) {
         return 'Сегодня звезды не хотят отвечать вам. Попробуйте позже';
     }
-}
+}*/
 
 
 const zodiacSigns = [
@@ -125,8 +125,6 @@ bot.on('callbackQuery', (msg) => {
     const data = msg.data; // callback_data кнопки
     const index = data.split('_')[1];
     const sign = zodiacSigns[index]
-
-    //console.log (prediction);
 
     bot.sendMessage(msg.from.id, `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
     
