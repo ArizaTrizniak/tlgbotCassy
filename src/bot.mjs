@@ -49,15 +49,17 @@ const keyboard = {
     ],
 };
 
-const buttons1 = [];
-const buttons1 = zodiacSigns.map((sign, index) => ({
-    buttons1.push();
 
-    text: `${sign.symbol} ${sign.name}`,
-    callback_data: `sign_${index}`,
-}));
-bot.inlineButton('callback', {callback: 'this_is_data'}),
-
+let replyMarkup = bot.inlineKeyboard([
+    [
+        bot.inlineButton('Овен', {callback: sign_1}),
+        bot.inlineButton('Телец', {callback: sign_2}),
+        bot.inlineButton('Близнецы', {callback: sign_3}),
+        bot.inlineButton('Рак', {callback: sign_4}),
+    ], [
+        bot.inlineButton('url', {url: 'https://telegram.org'})
+    ]
+]);
 
 /*bot.setMyCommands([
     {command: '/start', 'description': 'Гороскоп.'},
@@ -100,40 +102,11 @@ bot.on("text", msg => {
     const chatId = msg.chat.id;
 
     if (text === '/start') {
-        return bot.sendMessage(chatId, 'Выберите знак зодиака:', {
-            reply_markup: keyboard,
-        });
+        return bot.sendMessage(chatId, 'Выберите знак зодиака:', {replyMarkup});
     }
     msg.reply.text(msg.text)
 })
 
-// On commands
-bot.on(['/start'], msg => {
-
-    let replyMarkup = bot.keyboard([
-        ['/buttons', '/inlineKeyboard'],
-        ['/start', '/hide']
-    ], {resize: true});
-
-    return bot.sendMessage(msg.from.id, 'Keyboard example.', {replyMarkup});
-
-});
-
-// Inline buttons
-bot.on('/inlineKeyboard', msg => {
-
-    const replyMarkup = bot.inlineQueryKeyboard([
-        [
-            buttons.slice(0, 3),
-            buttons.slice(3, 6),
-            buttons.slice(6, 9),
-            buttons.slice(9, 12),
-        ]
-    ]);
-
-    return bot.sendMessage(msg.from.id, 'Inline keyboard example.', {replyMarkup});
-
-});
 
 export default bot;
 
