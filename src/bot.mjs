@@ -52,12 +52,15 @@ const keyboard = {
 
 let replyMarkup = bot.inlineKeyboard([
     [
-        bot.inlineButton('Овен', {callback: 'sign_1'}),
-        bot.inlineButton('Телец', {callback: 'sign_2'}),
-        bot.inlineButton('Близнецы', {callback: 'sign_3'}),
-        bot.inlineButton('Рак', {callback: 'sign_4'}),
+        bot.inlineButton('♈️ Овен', {callback: 'sign_0'}),
+        bot.inlineButton('♉️ Телец', {callback: 'sign_1'}),
+        bot.inlineButton('♊️ Близнецы', {callback: 'sign_2'}),
+        bot.inlineButton('♋️ Рак', {callback: 'sign_3'}),
     ], [
-        bot.inlineButton('url', {url: 'https://telegram.org'})
+        bot.inlineButton('♌️ Лев', {callback: 'sign_4'}),
+        bot.inlineButton('♍️ Дева', {callback: 'sign_5'}),
+        bot.inlineButton('♎️ Весы', {callback: 'sign_6'}),
+        bot.inlineButton('♏️ Скорпион', {callback: 'sign_7'}),
     ]
 ]);
 
@@ -76,7 +79,7 @@ let replyMarkup = bot.inlineKeyboard([
     }
 
     return bot.sendMessage(chatId, 'Звёзды не поняли вас')
-});
+});*/
 
 // Обработчик нажатий на кнопки
 bot.on('callback_query', (callbackQuery) => {
@@ -105,7 +108,13 @@ bot.on("text", msg => {
         return bot.sendMessage(chatId, 'Выберите знак зодиака:', {replyMarkup});
     }
     msg.reply.text(msg.text)
-})
+});
+
+// Inline button callback
+bot.on('callbackQuery', msg => {
+    // User message alert
+    return bot.answerCallbackQuery(msg.id, `Inline button callback: ${ msg.data }`, true);
+});
 
 
 export default bot;
