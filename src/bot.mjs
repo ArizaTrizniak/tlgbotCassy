@@ -122,13 +122,10 @@ bot.on('callbackQuery', (msg) => {
     const sign = zodiacSigns[index]
 
     console.log (data);
-    
-    if (data === index) {
-        bot.sendMessage(msg.from.id, `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
-    } else {
-        bot.sendMessage(msg.from.id, 'You pressed Button 2');
-    }
-    
+    console.log (index);
+
+    bot.sendMessage(msg.from.id, `Вы выбрали знак: ${sign.symbol} ${sign.name}`);
+
     // Подтверждение получения обратного вызова
     bot.answerCallbackQuery(msg.id, {
         text: 'Button pressed', // Сообщение, которое увидит пользователь
