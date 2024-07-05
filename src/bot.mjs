@@ -102,12 +102,17 @@ bot.on("text", msg => {
 // On commands
 bot.on(['/start'], msg => {
 
+    let replyMarkup = bot.keyboard([
+        ['/buttons', '/inlineKeyboard'],
+        ['/start', '/hide']
+    ], {resize: true});
+
     return bot.sendMessage(msg.from.id, 'Keyboard example.', {replyMarkup});
 
 });
 
 // Inline buttons
-bot.on('/kb', msg => {
+bot.on('/inlineKeyboard', msg => {
 
     const replyMarkup = bot.inlineKeyboard([
         [
