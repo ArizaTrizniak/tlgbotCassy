@@ -50,6 +50,7 @@ const keyboard = {
 };
 
 
+
 /*bot.setMyCommands([
     {command: '/start', 'description': 'Гороскоп.'},
 ]);*/
@@ -101,24 +102,22 @@ bot.on("text", msg => {
 // On commands
 bot.on(['/start'], msg => {
 
-    let replyMarkup = bot.keyboard([
-        [ '/inlineKeyboard'],
-        ['/start', '/hide']
-    ], {resize: true});
-
     return bot.sendMessage(msg.from.id, 'Keyboard example.', {replyMarkup});
 
 });
 
 // Inline buttons
-bot.on('/inlineKeyboard', msg => {
+bot.on('/kb', msg => {
 
-    let replyMarkup = bot.inlineKeyboard([
+    const replyMarkup = bot.inlineKeyboard([
         [
             bot.inlineButton('callback', {callback: 'this_is_data'}),
             bot.inlineButton('inline', {inline: 'some query'})
         ], [
-            bot.inlineButton('url', {url: 'https://telegram.org'})
+            buttons.slice(0, 3),
+            buttons.slice(3, 6),
+            buttons.slice(6, 9),
+            buttons.slice(9, 12),
         ]
     ]);
 
