@@ -110,10 +110,15 @@ bot.on("text", msg => {
     msg.reply.text(msg.text)
 });
 
-// Inline button callback
-bot.on('callbackQuery', msg => {
-    // User message alert
-    return bot.answerCallbackQuery(msg.id, `Inline button callback: ${ msg.data }`, true);
+bot.on('callbackQuery', (msg) => {
+    const data = msg.data; // callback_data of the button
+  
+    if (data === 'sign_0') {
+      bot.sendMessage(msg.from.id, 'You pressed Button 1');
+    } else {
+      bot.sendMessage(msg.from.id, 'You pressed Button ?');
+    }
+    bot.answerCallbackQuery(msg.id); // Acknowledge the callback
 });
 
 
