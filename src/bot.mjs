@@ -1,9 +1,9 @@
 import TeleBot from "telebot"
-import {OpenAI} from 'openai';
+/*import {OpenAI} from 'openai';*/
 
 const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 
-const openai = new OpenAI({
+/*const openai = new OpenAI({
     apiKey: process.env.OPEN_API_TOKEN,
 });
 
@@ -53,7 +53,7 @@ const keyboard = {
     {command: '/start', 'description': 'Гороскоп.'},
 ]);*/
 
-bot.on('message', async msg => {
+/*bot.on('message', async msg => {
     const text = msg.text;
     const chatId = msg.chat.id;
 
@@ -83,7 +83,9 @@ bot.on('callback_query', (callbackQuery) => {
         console.error('Error sending message:', error);
         bot.sendMessage(msg.chat.id, 'Произошла ошибка при отправке предсказания.');
     });
-});
+});*/
+
+bot.on("text", msg => msg.reply.text(msg.text))
 
 export default bot;
 
