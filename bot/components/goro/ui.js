@@ -1,5 +1,4 @@
-const {Markup} = require("telegraf");
-const bot = require("../../connection/token.connection");
+const generateText = require("./ai");
 
 const zodiacSigns = [
     { name: 'Овен', symbol: '♈️' },
@@ -16,24 +15,51 @@ const zodiacSigns = [
     { name: 'Рыбы', symbol: '♓️' },
 ];
 
-const buttons = zodiacSigns.map((sign, index) =>
-    Markup.button.callback(`${sign.symbol} ${sign.name}`, `sign_${index}`)
+const goroButtons = zodiacSigns.map((sign, index) =>
+    ` ${sign.symbol} ${sign.name}`
 );
 
+const zodiacSymbols = zodiacSigns.map((sign, index) =>
+    `${sign.symbol}`
+);
+
+const isZodiacSign = (value)=> {
+    return zodiacSymbols.findIndex(element => {
+            return value.indexOf(element) !== -1
+    });
+}
+
+const prediction = async (value) => {
+    const errorMessage = 'Звезды вас не поняли. Воспользуйтесь кнопками.';
+
+    if (value === undefined) {return errorMessage;}
+
+    const index = isZodiacSign(value);
+
+    if (index > -1) {
+        const sign = zodiacSigns[index].name;
+        try {
+            return await generateText(sign);
+
+        } catch (e) {
+            console.error("Ошибка:  : " + e);
+            return errorMessage;
+        }
+
+    } else {
+        console.log(errorMessage);
+        return errorMessage;
+    }
+}
 
 const goroKeyboard = [
-        buttons.slice(0, 3),
-        buttons.slice(3, 6),
-        buttons.slice(6, 9),
-        buttons.slice(9, 12),
-    ];
-
-const goroSign = (index) => {
-    const sign = zodiacSigns[index];
-    return sign.name;
-};
+    goroButtons.slice(0, 3),
+    goroButtons.slice(3, 6),
+    goroButtons.slice(6, 9),
+    goroButtons.slice(9, 12),
+];
 
 module.exports = {
-    goroSign,
-    goroKeyboard
+    goroKeyboard,
+    prediction
 };

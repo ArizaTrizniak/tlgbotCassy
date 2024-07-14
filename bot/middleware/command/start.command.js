@@ -4,11 +4,7 @@ const {goroKeyboard} = require("../../components/goro/ui");
 
 module.exports = bot.start(ctx => {
    try {
-      return ctx.reply(
-          "Выберите знак зодиака",
-          Markup.inlineKeyboard(goroKeyboard),
-      );
-
+      ctx.reply('Выберите знак зодиака', Markup.keyboard(goroKeyboard).resize().persistent());
    } catch (e) {
       console.log(e);
    }
