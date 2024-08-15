@@ -1,5 +1,9 @@
 Telegram bot - horoscope. Makes predictions based on zodiac sign using AI.
 
+To launch the bot, you will need your data for environment variables:
+OPENAI_API_KEY - this is a token for connecting to Open AI
+BOT_TOKEN - a token that is issued by Telegram when registering a new bot.
+
 Disclaimer
 
 This program is intended for entertainment purposes only and does not provide professional astrological consultations. 
